@@ -1,0 +1,44 @@
+name: Mise a jour du calendrier
+
+# Lit le tableau Monday et republie la page, sept fois par jour.
+# Heures UTC : le chantier se fait en novembre-decembre, donc Quebec = UTC-5.
+# 11h37 UTC = 6h37 a Quebec, 23h37 UTC = 18h37 a Quebec.
+
+on:
+  schedule:
+    - cron: "37 11,13,15,17,19,21,23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: calendrier
+  cancel-in-progress: false
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerer la page depuis Monday
+        env:
+          MONDAY_CONFIG: ${{ secrets.MONDAY_CONFIG }}
+        run: python build/maj.py
+
+      - name: Publier si quelque chose a change
+        run: |
+          if [ -z "$(git status --porcelain index.html)" ]; then
+            echo "Rien de nouveau dans Monday, la page reste telle quelle."
+            exit 0
+          fi
+          git config user.name "Calendrier de chantier"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Mise a jour du calendrier de chantier"
+          git push
