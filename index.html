@@ -1,0 +1,1194 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Chantier 625 Lebourgneuf — Boxéa</title>
+<meta name="description" content="Calendrier des travaux du centre Boxéa au 625, boulevard Lebourgneuf, à Québec.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="boxea.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+  :root {
+    --accent: #8A7100;
+    --encre: #2B2A28;
+    --gris: #777470;
+    --filet: #DCD8D3;
+    --fond: #FCFCFB;
+    --bandeau: #F2EFEC;
+    --boxea: #CCA900;
+    --lot: #F1E6C3;
+    --surface: #FFFFFF;
+    --weekend: #F6F3F0;
+    --aujourdhui: rgba(255, 211, 0, .24);
+    --ombre: 0 1px 2px rgba(43, 42, 40, .06), 0 8px 24px rgba(43, 42, 40, .05);
+    --display: "Space Grotesk", "Inter", system-ui, sans-serif;
+    --texte: "Inter", system-ui, -apple-system, sans-serif;
+    --jour: 36px;
+    --titre: clamp(19px, 3.6vw, 25px);
+    --libelle: 292px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --accent: #FFD300;
+      --encre: #EDEAE6;
+      --lot: #403A27;
+      --gris: #9D9893;
+      --filet: #3A3835;
+      --fond: #1A1917;
+      --bandeau: #232120;
+      --surface: #232120;
+      --weekend: #1F1E1C;
+      --aujourdhui: rgba(255, 211, 0, .13);
+      --ombre: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .28);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --accent: #FFD300;
+    --encre: #EDEAE6;
+    --lot: #403A27;
+    --gris: #9D9893;
+    --filet: #3A3835;
+    --fond: #1A1917;
+    --bandeau: #232120;
+    --surface: #232120;
+    --weekend: #1F1E1C;
+    --aujourdhui: rgba(255, 211, 0, .13);
+    --ombre: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .28);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--fond);
+    color: var(--encre);
+    font-family: var(--texte);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 30;
+    background: var(--bandeau);
+  }
+  .gouttiere {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .page { max-width: 1400px; margin: 0 auto; }
+
+  /* ---------- bandeau ---------- */
+  header.tete {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: var(--bandeau);
+    border-bottom: 1px solid var(--filet);
+    padding-block: 14px 12px;
+  }
+  .tete-haut { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; }
+  .titre-bloc {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 14px;
+    min-width: 0;
+    position: relative;
+    top: calc(var(--titre) * 0.137);
+  }
+  .logo { height: calc(var(--titre) * 1.6); width: auto; align-self: center; flex: none; }
+  .logo.sombre { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .logo.clair { display: none; }
+    :root:not([data-theme="light"]) .logo.sombre { display: block; }
+  }
+  :root[data-theme="dark"] .logo.clair { display: none; }
+  :root[data-theme="dark"] .logo.sombre { display: block; }
+  h1 {
+    font-family: var(--display);
+    font-size: var(--titre);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .sous-titre { color: var(--gris); font-size: 13px; }
+  .compteur {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+  .horloge { display: flex; align-items: baseline; gap: 3px; }
+  .unite { display: flex; flex-direction: column; align-items: center; }
+  .compteur .n {
+    font-family: var(--display);
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent);
+    font-style: normal;
+  }
+  .compteur .u {
+    font-size: 9px;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--gris);
+    margin-top: 3px;
+  }
+  .compteur .sep {
+    font-family: var(--display);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--gris);
+    opacity: .5;
+    align-self: flex-start;
+    line-height: 1.1;
+  }
+  .compteur .quoi { font-size: 11.5px; color: var(--gris); line-height: 1.25; max-width: 13ch; }
+
+  .barre {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  select, button.ctl {
+    font: inherit;
+    font-size: 13px;
+    color: var(--encre);
+    background: var(--surface);
+    border: 1px solid var(--filet);
+    border-radius: 7px;
+    padding: 6px 9px;
+    cursor: pointer;
+    min-width: 0;
+  }
+  button.ctl[aria-pressed="true"] {
+    background: var(--encre);
+    color: var(--fond);
+    border-color: var(--encre);
+  }
+  :is(select, button, a):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .synchro {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--gris);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .pastille { width: 7px; height: 7px; border-radius: 50%; background: #00c875; flex: none; }
+
+  /* ---------- mot d'accueil ---------- */
+  .accueil {
+    margin-top: 14px;
+    border: 1px solid var(--filet);
+    border-left: 3px solid var(--boxea);
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 11px 13px;
+    font-size: 13.5px;
+  }
+  .accueil p { margin: 0; }
+  .accueil p + p { margin-top: 5px; color: var(--gris); }
+  .accueil a { color: var(--accent); }
+
+  /* ---------- Gantt ---------- */
+  .cadre {
+    margin-top: 16px;
+    border: 1px solid var(--filet);
+    border-radius: 10px;
+    background: var(--surface);
+    box-shadow: var(--ombre);
+    overflow: hidden;
+  }
+  .defile { overflow-x: auto; overflow-y: visible; }
+  .grille { min-width: max-content; }
+
+  .rang {
+    display: grid;
+    grid-template-columns: var(--libelle) repeat(var(--n), var(--jour));
+    align-items: stretch;
+    border-bottom: 1px solid var(--filet);
+  }
+  .rang:last-child { border-bottom: 0; }
+
+  .libelle {
+    position: sticky;
+    left: 0;
+    z-index: 5;
+    background: var(--surface);
+    border-right: 1px solid var(--filet);
+    padding: 7px 12px 7px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .libelle .nom {
+    font-size: 13.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .rang.lot { border-bottom: 0; border-top: 1px solid var(--filet); }
+  .rang.lot:first-of-type { border-top: 0; }
+  .rang.lot .libelle,
+  .rang.lot .piste {
+    background: var(--lot);
+    border-color: rgba(128, 128, 128, .22);
+  }
+  .rang.lot .libelle { padding: 4px 12px 4px 10px; gap: 9px; }
+  .rang.lot .piste { min-height: 0; }
+  .rang.lot.solo .piste { min-height: 34px; }
+  .bande-lot {
+    grid-row: 1;
+    align-self: center;
+    height: 6px;
+    border-radius: 3px;
+    margin: 0 3px;
+    background: var(--boxea);
+    z-index: 2;
+  }
+  .rang.lot.solo .libelle { padding-block: 7px; }
+  .libelle .num {
+    font-family: var(--display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--fond);
+    background: var(--encre);
+    border-radius: 4px;
+    padding: 2px 5px;
+    flex: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .lot-tete { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+  .lot-tete .fourn {
+    font-size: 10.5px;
+    color: var(--gris);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .rang.lot .libelle .nom {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: .01em;
+    color: var(--encre);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .rang.tache .libelle { padding-left: 0; }
+  .rang.tache .libelle::before {
+    content: "";
+    width: 3px;
+    align-self: stretch;
+    background: var(--filet);
+    flex: none;
+    margin-right: 13px;
+  }
+  .rang.tache .libelle .nom { font-size: 13px; }
+
+  .cellule-tete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1px;
+    padding: 7px 0 6px;
+    font-variant-numeric: tabular-nums;
+    border-left: 1px solid var(--filet);
+  }
+  .cellule-tete .jsem { font-size: 9.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--gris); }
+  .cellule-tete .jnum { font-size: 13px; font-weight: 600; }
+  .rang.tete { border-bottom: 1px solid var(--filet); background: var(--surface); position: relative; z-index: 6; }
+  .rang.tete .libelle { background: var(--surface); }
+  .mois {
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--gris);
+    border-left: 1px solid var(--filet);
+    padding: 6px 0 4px 8px;
+    white-space: nowrap;
+  }
+
+  .piste { grid-row: 1; border-left: 1px solid var(--filet); min-height: 34px; }
+  .piste.we { background: var(--weekend); }
+  .piste.fete {
+    background: repeating-linear-gradient(135deg,
+      var(--weekend) 0 5px, transparent 5px 10px);
+  }
+  .piste.auj { background: var(--aujourdhui); }
+  .piste.we.auj { background: var(--aujourdhui); }
+
+  .barre-tache {
+    grid-row: 1;
+    align-self: center;
+    height: 22px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #10100F;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+    margin: 0 2px;
+  }
+  .barre-tache .j { opacity: .72; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .barre-tache .txt { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+
+  .jalon {
+    grid-row: 1;
+    align-self: center;
+    justify-self: start;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 3px;
+    font-family: var(--display);
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .jalon::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    flex: none;
+  }
+
+  .libelle .etat { margin-left: auto; }
+  .etat {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    padding: 2px 6px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex: none;
+    color: #10100F;
+  }
+
+  /* ---------- detail lot par lot ---------- */
+  .liste { margin-top: 22px; }
+  .liste h2 {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    margin: 0 0 4px;
+  }
+  .liste .intro { margin: 0 0 11px; font-size: 12.5px; color: var(--gris); }
+  .carte {
+    border: 1px solid var(--filet);
+    border-radius: 10px;
+    background: var(--surface);
+    overflow: hidden;
+    margin-bottom: 9px;
+  }
+  .carte-tete {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 3px 9px;
+    padding: 9px 13px;
+    background: var(--lot);
+    border-bottom: 1px solid var(--filet);
+  }
+  .carte-tete .nom {
+    font-family: var(--display);
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: .01em;
+  }
+  .carte-tete .fourn { font-size: 12px; color: var(--gris); }
+  .carte-tete .dates {
+    margin-left: auto;
+    font-size: 12.5px;
+    color: var(--gris);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .carte-tete .etat { align-self: center; }
+  .carte ul { list-style: none; margin: 0; padding: 0; }
+  .carte li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    padding: 9px 13px;
+    border-bottom: 1px solid var(--filet);
+  }
+  .carte li:last-child { border-bottom: 0; }
+  .carte li .quoi { font-size: 13.5px; flex: 1 1 60%; min-width: 0; overflow-wrap: anywhere; }
+  .carte li .dates {
+    font-size: 12.5px;
+    color: var(--gris);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .carte li .etat { align-self: center; }
+
+  /* ---------- listes secondaires ---------- */
+  details.bloc {
+    margin-top: 16px;
+    border: 1px solid var(--filet);
+    border-radius: 10px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  details.bloc > summary {
+    cursor: pointer;
+    padding: 11px 14px;
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .02em;
+  }
+  details.bloc > summary::marker { color: var(--gris); }
+  .hors { border-top: 1px solid var(--filet); list-style: none; margin: 0; padding: 0; }
+  .hors li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--filet);
+    font-size: 13.5px;
+  }
+  .hors li:last-child { border-bottom: 0; }
+  .hors .dates { color: var(--gris); font-size: 12px; font-variant-numeric: tabular-nums; margin-left: auto; }
+  .hors .lot-de {
+    font-size: 11px;
+    color: var(--gris);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  /* ---------- fil du chantier ---------- */
+  .fil { margin-top: 26px; }
+  .fil h2 {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    margin: 0 0 4px;
+  }
+  .fil .intro { margin: 0 0 11px; font-size: 12.5px; color: var(--gris); }
+  .medias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr));
+    gap: 6px;
+    margin-top: 9px;
+  }
+  .medias a, .medias video {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--filet);
+    background: var(--bandeau);
+  }
+  .medias img { width: 100%; height: 150px; object-fit: cover; display: block; }
+  .medias video { width: 100%; max-height: 260px; }
+
+  .messages { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  .message {
+    border: 1px solid var(--filet);
+    border-left: 3px solid var(--boxea);
+    border-radius: 9px;
+    background: var(--surface);
+    padding: 10px 13px;
+  }
+  .msg-tete { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+  .quand {
+    font-size: 11.5px;
+    color: var(--gris);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .01em;
+  }
+  .msg-qui { font-size: 11.5px; font-weight: 600; color: var(--encre); }
+  .msg-texte { margin: 0; font-size: 14px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .fil-vide {
+    border: 1px dashed var(--filet);
+    border-radius: 9px;
+    padding: 18px 14px;
+    text-align: center;
+    color: var(--gris);
+    font-size: 13.5px;
+  }
+
+  .legende {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--gris);
+    align-items: center;
+  }
+  .legende span.puce { display: inline-flex; align-items: center; gap: 5px; }
+  .legende i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+
+  .pied {
+    margin-top: 18px;
+    padding: 14px 0 30px;
+    border-top: 1px solid var(--filet);
+    font-size: 12px;
+    color: var(--gris);
+  }
+  .pied p { margin: 0; }
+  .pied p + p { margin-top: 4px; }
+
+  .vide { padding: 34px 18px; text-align: center; color: var(--gris); font-size: 14px; }
+  .vide b { color: var(--encre); font-weight: 600; display: block; margin-bottom: 4px; font-family: var(--display); }
+
+  @media (max-width: 620px) {
+    :root { --libelle: 162px; --jour: 31px; }
+    .compteur { margin-left: 0; }
+    .synchro { margin-left: 0; width: 100%; }
+    /* le nom passe avant tout : deux lignes, l'avancement dessous */
+    .rang.tache .libelle::before { display: none; }
+    .rang.tache .libelle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: 6px 8px 6px 11px;
+      border-left: 3px solid var(--filet);
+    }
+    .rang.tache .libelle .nom {
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.22;
+      font-size: 12px;
+    }
+    .rang.lot .libelle .nom { white-space: normal; line-height: 1.22; }
+    .libelle .etat { margin-left: 0; font-size: 9px; padding: 1px 5px; }
+    .rang.lot.solo .libelle { flex-wrap: wrap; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="tete">
+  <div class="page gouttiere">
+    <div class="tete-haut">
+      <img class="logo clair" src="boxea.png" alt="Boxéa" width="339" height="103">
+      <img class="logo sombre" src="boxea-sombre.png" alt="" aria-hidden="true" width="339" height="103">
+      <div class="titre-bloc">
+        <h1>Chantier&nbsp;— 625 Lebourgneuf</h1>
+        <span class="sous-titre">Boxéa · Québec</span>
+      </div>
+      <div class="compteur" role="timer" aria-label="Temps restant avant la fin des travaux">
+        <div class="horloge">
+          <span class="unite"><b class="n" id="cJ">—</b><i class="u">jours</i></span>
+          <span class="sep">:</span>
+          <span class="unite"><b class="n" id="cH">—</b><i class="u">h</i></span>
+          <span class="sep">:</span>
+          <span class="unite"><b class="n" id="cM">—</b><i class="u">min</i></span>
+          <span class="sep">:</span>
+          <span class="unite"><b class="n" id="cS">—</b><i class="u">s</i></span>
+        </div>
+        <span class="quoi">avant la fin des travaux, le 22 décembre</span>
+      </div>
+    </div>
+    <div class="barre">
+      <select id="fLot" aria-label="Filtrer par lot"><option value="">Tous les lots</option></select>
+      <select id="fFourn" aria-label="Filtrer par fournisseur"><option value="">Tous les fournisseurs</option></select>
+      <select id="fEtat" aria-label="Filtrer par avancement"><option value="">Tous les avancements</option></select>
+      <button class="ctl" id="bTermine" aria-pressed="true">Afficher faits et annulés</button>
+      <span class="synchro"><span class="pastille"></span><span id="synchroTxt">—</span></span>
+    </div>
+  </div>
+</header>
+
+<main class="page gouttiere">
+  <div class="accueil">
+    <p><strong>Trouve ton nom dans le filtre « Tous les fournisseurs »</strong> pour voir seulement ce qui te concerne, avec tes dates.</p>
+    <p>Une date qui ne marche pas, un devancement possible, une question : appelle Sharon directement. Le calendrier se met à jour tout seul plusieurs fois par jour.</p>
+  </div>
+
+  <div class="cadre">
+    <div class="defile" id="defile">
+      <div class="grille" id="grille"></div>
+    </div>
+  </div>
+  <section class="liste">
+    <h2>Le détail, lot par lot</h2>
+    <p class="intro">Les mêmes travaux, écrits au long. Le filtre plus haut s'applique ici aussi.</p>
+    <div id="liste"></div>
+  </section>
+
+  <div id="secondaire"></div>
+
+  <section class="fil">
+    <h2>Fil du chantier</h2>
+    <p class="intro">Les nouvelles du 625, publiées par Sharon.</p>
+    <ol class="messages" id="messages"></ol>
+  </section>
+
+  <div class="legende" id="legende"></div>
+
+  <div class="pied">
+    <p>Chantier du centre Boxéa, 625 boulevard Lebourgneuf, Québec.</p>
+    <p>Page de suivi à l'usage des fournisseurs du chantier. Les dates sont celles du calendrier de chantier et peuvent bouger&nbsp;; la version qui fait foi est celle affichée ici.</p>
+  </div>
+</main>
+
+<script>
+/*<![CDATA[*/
+var DONNEES = /*INJECT_DONNEES*/{"items":[{"n":"Plan d'architecture","a":"FAIT","d":"2026-06-06 - 2026-06-19","f":"Quinzhee — Catherine Parent","s":[{"n":"Définir le layout du local avec l'espace Karate","a":"FAIT","d":"2026-06-06 - 2026-06-09","f":""},{"n":"Plans d'aménagement — approbation écrite de Metro","a":"FAIT","d":"2026-11-23 - 2026-11-23","f":""}]},{"n":"Demande de permis","a":"EN COURS","d":"2026-11-23 - 2026-12-31","f":"Franchises Boxéa","s":[{"n":"Permis d'occupation","a":"ATTENTE DE SUIVI","d":"2026-11-23 - 2026-12-31","f":""},{"n":"Permis de construction","a":"CANCEL","d":"2026-11-23 - 2026-12-31","f":""},{"n":"Certificat de conformité d'urbanisme","a":"CANCEL","d":"2026-06-06 - 2026-06-19","f":""},{"n":"Permis d'affichage + soumission enseigne","a":"ATTENTE DE SUIVI","d":"2026-06-06 - 2026-06-19","f":""}]},{"n":"Assurances","a":"FAIT","d":"2026-11-22 - 2026-11-23","f":"","s":[]},{"n":"Système d'alarme & caméras","a":"EN ATTENTE","d":"2026-12-21 - 2026-12-21","f":"","s":[{"n":"Installation alarme et caméras","a":"EN ATTENTE","d":"2026-12-21 - 2026-12-21","f":""},{"n":"Identifier le fournisseur d'alarme et caméras","a":"EN COURS","d":"2026-11-24 - 2026-11-27","f":""}]},{"n":"Joints, plâtrage et peinture","a":"EN COURS","d":"2026-12-11 - 2026-12-16","f":"Peintre à Québec — Mario Beaudin","s":[{"n":"Apprêt et peinture","a":"EN ATTENTE","d":"2026-12-15 - 2026-12-16","f":""},{"n":"Préavis de 48 h à Mario","a":"EN ATTENTE","d":"2026-12-09 - 2026-12-09","f":""},{"n":"Trois couches de joints et sablage","a":"EN ATTENTE","d":"2026-12-11 - 2026-12-14","f":""}]},{"n":"Enseigne extérieure","a":"ATTENTE DE SUIVI","d":"","f":"GC2P — Stéphan Duchaine","s":[{"n":"Déposer le permis d'affichage à la Ville","a":"ATTENTE DE SUIVI","d":"","f":""},{"n":"Trancher entre GC2P et Enseignes ESM","a":"ATTENTE DE SUIVI","d":"","f":""}]},{"n":"Ébénisterie","a":"EN COURS","d":"2026-12-21 - 2026-12-21","f":"Martin Lefebvre","s":[{"n":"Confirmer le délai et commander l'ébénisterie","a":"EN COURS","d":"2026-11-24 - 2026-11-24","f":""},{"n":"Pose du comptoir d'accueil","a":"EN ATTENTE","d":"2026-12-21 - 2026-12-21","f":""}]},{"n":"Éclairage / luminaires","a":"ATTENTE DE SUIVI","d":"2026-12-18 - 2026-12-18","f":"Nicholls Électricien — Jeffrey","s":[{"n":"Pose des luminaires","a":"EN ATTENTE","d":"2026-12-18 - 2026-12-18","f":""},{"n":"Confirmer le délai et commander les luminaires","a":"EN COURS","d":"2026-11-24 - 2026-11-24","f":""}]},{"n":"Équipements d'entraînement","a":"EN ATTENTE","d":"2026-12-22 - 2026-12-22","f":"Boxéa — René Côté et Steve Bernier","s":[{"n":"Montage des équipements, ring et sacs","a":"EN ATTENTE","d":"2026-12-22 - 2026-12-22","f":""}]},{"n":"Nettoyage final et inspection","a":"EN ATTENTE","d":"2026-12-22 - 2026-12-22","f":"Groupe BSA Constructions — Maxime Tremblay Boily","s":[{"n":"Inspection finale, grand ménage et mise en place","a":"EN ATTENTE","d":"2026-12-22 - 2026-12-22","f":""}]},{"n":"Plomberie","a":"ATTRIBUÉ","d":"2026-12-03 - 2026-12-04","f":"Groupe BSA Constructions — Maxime Tremblay Boily","s":[{"n":"Plomberie brute","a":"EN ATTENTE","d":"2026-12-03 - 2026-12-04","f":""},{"n":"Confirmer le fournisseur et les dates","a":"EN COURS","d":"2026-11-24 - 2026-11-24","f":""}]},{"n":"Électricité","a":"EN COURS","d":"2026-12-02 - 2026-12-18","f":"Nicholls Électricien — Jeffrey","s":[{"n":"Confirmer disponibilité et délai des luminaires","a":"EN COURS","d":"2026-11-24 - 2026-11-24","f":""},{"n":"Filage électrique","a":"EN ATTENTE","d":"2026-12-02 - 2026-12-04","f":""},{"n":"Luminaires, finition et mise sous tension","a":"EN ATTENTE","d":"2026-12-18 - 2026-12-18","f":""}]},{"n":"Cloisons, gypse et coupe-feu","a":"EN ATTENTE","d":"2026-11-30 - 2026-12-10","f":"Groupe BSA Constructions — Maxime Tremblay Boily","s":[{"n":"Pose du gypse","a":"EN ATTENTE","d":"2026-12-08 - 2026-12-10","f":""},{"n":"Montage des divisions — locaux privés","a":"EN ATTENTE","d":"2026-11-30 - 2026-12-02","f":""},{"n":"Séparations coupe-feu selon le plan Quinzhee","a":"EN ATTENTE","d":"2026-12-03 - 2026-12-04","f":""}]},{"n":"Finition de plancher","a":"ATTENTE DE SUIVI","d":"2026-12-17 - 2026-12-18","f":"Groupe BSA Constructions — Maxime Tremblay Boily","s":[{"n":"Confirmer le délai de livraison et commander","a":"EN COURS","d":"2026-11-24 - 2026-11-24","f":""},{"n":"Pose du plancher d'entraînement","a":"EN ATTENTE","d":"2026-12-17 - 2026-12-18","f":""}]},{"n":"Entrepreneur général","a":"EN COURS","d":"2026-11-27 - 2026-12-22","f":"Groupe BSA Constructions — Maxime Tremblay Boily","s":[{"n":"Inspection avant fermeture des murs","a":"EN ATTENTE","d":"2026-12-07 - 2026-12-07","f":""},{"n":"Visite de chantier avec Maxime — figer la séquence","a":"EN ATTENTE","d":"2026-11-25 - 2026-11-25","f":""},{"n":"Quittances signées à chaque paiement","a":"EN COURS","d":"2026-11-27 - 2026-12-22","f":""},{"n":"Confirmer le démarrage et les samedis travaillés","a":"EN COURS","d":"2026-11-24 - 2026-11-24","f":""},{"n":"Tournée d'appels aux fournisseurs","a":"EN COURS","d":"2026-11-23 - 2026-11-24","f":""}]},{"n":"Démolition","a":"EN ATTENTE","d":"2026-11-27 - 2026-11-28","f":"Groupe BSA Constructions — Maxime Tremblay Boily","s":[{"n":"Démolition et sortie des matériaux","a":"EN ATTENTE","d":"2026-11-27 - 2026-11-27","f":""},{"n":"Démolition, suite (samedi à confirmer)","a":"EN ATTENTE","d":"2026-11-28 - 2026-11-28","f":""}]},{"n":"Système de son","a":"ATTENTE DE SUIVI","d":"2026-12-21 - 2026-12-21","f":"La Liberté électronique — Christian Lafleur","s":[{"n":"Installation du système de son","a":"EN ATTENTE","d":"2026-12-21 - 2026-12-21","f":""},{"n":"Rencontre avec Christian — La Liberté électronique","a":"EN COURS","d":"2026-11-24 - 2026-11-24","f":""}]},{"n":"Banderole + affichage vitre - Ouverture bientôt","a":"ATTENTE DE SUIVI","d":"2026-12-12 - 2026-12-18","f":"Enseignes ESM — Frédéric Perron","s":[{"n":"Pose de la banderole et des vitres","a":"EN ATTENTE","d":"2026-12-17 - 2026-12-18","f":""},{"n":"Production de la banderole et des vitres","a":"EN ATTENTE","d":"2026-12-12 - 2026-12-12","f":""}]}]}/*FIN*/;
+var NOUVELLES = /*INJECT_NOUVELLES*/[]/*FIN*/;
+var GENERE = /*INJECT_GENERE*/1795471856589/*FIN*/;
+
+(function () {
+  "use strict";
+
+  var OUVERTURE = "2026-12-22";
+  var CIBLE = Date.parse("2026-12-22T00:00:00-05:00");
+  var FETE_DEBUT = "2026-12-24";
+  var FETE_FIN = "2027-01-03";
+  var FENETRE_DEBUT = "2026-11-23";
+
+  var COULEURS = {
+    "FAIT": "#00c875",
+    "EN COURS": "#fdab3d",
+    "CANCEL": "#df2f4a",
+    "RÉFÉRENCE": "#037f4c",
+    "EN ATTENTE": "#579bfc",
+    "ATTENTE DE SUIVI": "#401694",
+    "ATTRIBUÉ": "#216edf"
+  };
+  var CLAIR = { "CANCEL": 1, "RÉFÉRENCE": 1, "ATTENTE DE SUIVI": 1, "ATTRIBUÉ": 1, "EN ATTENTE": 1 };
+  var TERMINES = { "FAIT": 1, "CANCEL": 1, "RÉFÉRENCE": 1 };
+  var JSEM = ["D", "L", "M", "M", "J", "V", "S"];
+  var MOIS = ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"];
+
+  var SANS_FOURN = "(lot à attribuer)";
+  var $ = function (id) { return document.getElementById(id); };
+  var etat = { taches: null, lot: "", avancement: "", fournisseur: "", masquerTermines: true };
+
+  /* ---------- dates ---------- */
+  function jour(s) { var p = String(s).split("-"); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+  function cle(d) {
+    return d.getUTCFullYear() + "-" + String(d.getUTCMonth() + 1).padStart(2, "0") + "-" + String(d.getUTCDate()).padStart(2, "0");
+  }
+  function plus(d, n) { var x = new Date(d.getTime()); x.setUTCDate(x.getUTCDate() + n); return x; }
+  function ecart(a, b) { return Math.round((jour(b) - jour(a)) / 86400000); }
+  function joliJour(s) { var d = jour(s); return d.getUTCDate() + " " + MOIS[d.getUTCMonth()]; }
+  function aujourdhuiCle() {
+    var n = new Date();
+    return n.getFullYear() + "-" + String(n.getMonth() + 1).padStart(2, "0") + "-" + String(n.getDate()).padStart(2, "0");
+  }
+  function plage(v) {
+    if (!v) return null;
+    var m = String(v).match(/(\d{4}-\d{2}-\d{2})(?:\D+(\d{4}-\d{2}-\d{2}))?/);
+    if (!m) return null;
+    var a = m[1], b = m[2] || m[1];
+    return ecart(a, b) < 0 ? { debut: b, fin: a } : { debut: a, fin: b };
+  }
+
+  /* ---------- mise a plat : n(om), a(vancement), d(ates), f(ournisseur), s(ous-travaux) ---------- */
+  function aplatir(payload) {
+    var items = (payload && payload.items) || [];
+    var out = [];
+    items.forEach(function (it) {
+      var fourn = typeof it.f === "string" ? it.f : "";
+      var subs = it.s || [];
+      var lot = { nom: String(it.n || ""), fournisseur: fourn, dLot: plage(it.d) };
+      if (!subs.length) {
+        out.push({
+          lot: lot, nom: lot.nom,
+          avancement: String(it.a || ""),
+          fournisseur: fourn,
+          d: plage(it.d), seul: true
+        });
+        return;
+      }
+      subs.forEach(function (s) {
+        out.push({
+          lot: lot, nom: String(s.n || ""),
+          avancement: String(s.a || ""),
+          fournisseur: (typeof s.f === "string" && s.f) ? s.f : fourn,
+          d: plage(s.d), seul: false
+        });
+      });
+    });
+    return out;
+  }
+
+  /* ---------- rendu ---------- */
+  function visible(t) {
+    if (etat.lot && t.lot.nom !== etat.lot) return false;
+    if (etat.avancement && t.avancement !== etat.avancement) return false;
+    if (etat.fournisseur === SANS_FOURN) { if (t.fournisseur) return false; }
+    else if (etat.fournisseur && t.fournisseur !== etat.fournisseur) return false;
+    if (etat.masquerTermines && TERMINES[t.avancement]) return false;
+    return true;
+  }
+
+  function el(tag, cls, txt) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
+  function badge(av) {
+    var b = el("span", "etat", av || "—");
+    var c = COULEURS[av] || "#9a9590";
+    b.style.background = c;
+    if (CLAIR[av]) b.style.color = "#fff";
+    return b;
+  }
+
+  function remplirFiltres(taches) {
+    var lots = [], avs = [], fos = [];
+    taches.forEach(function (t) {
+      if (t.lot.nom && lots.indexOf(t.lot.nom) < 0) lots.push(t.lot.nom);
+      if (t.avancement && avs.indexOf(t.avancement) < 0) avs.push(t.avancement);
+      if (t.fournisseur && fos.indexOf(t.fournisseur) < 0) fos.push(t.fournisseur);
+    });
+    var parAlpha = function (x, y) { return x.localeCompare(y, "fr", { sensitivity: "base" }); };
+    lots.sort(parAlpha);
+    fos.sort(parAlpha);
+    if (taches.some(function (t) { return !t.fournisseur; })) fos.push(SANS_FOURN);
+    [[$("fLot"), lots, etat.lot, "Tous les lots"],
+     [$("fFourn"), fos, etat.fournisseur, "Tous les fournisseurs"],
+     [$("fEtat"), avs, etat.avancement, "Tous les avancements"]]
+      .forEach(function (g) {
+        var sel = g[0];
+        sel.textContent = "";
+        sel.appendChild(el("option", null, g[3])).value = "";
+        g[1].forEach(function (v) { var o = el("option", null, v); o.value = v; sel.appendChild(o); });
+        sel.value = g[2];
+      });
+  }
+
+  function rendre() {
+    var taches = etat.taches;
+    var grille = $("grille");
+    grille.textContent = "";
+    if (!taches) return;
+
+    var retenues = taches.filter(visible);
+    var datees = retenues.filter(function (t) { return t.d; });
+    var sansDate = retenues.filter(function (t) { return !t.d; });
+
+    var auj = aujourdhuiCle();
+    var debut = FENETRE_DEBUT, fin = OUVERTURE;
+    var dansFenetre = [], dehors = [];
+    datees.forEach(function (t) {
+      if (ecart(t.d.fin, FENETRE_DEBUT) > 0 || ecart(OUVERTURE, t.d.debut) > 0) dehors.push(t);
+      else dansFenetre.push(t);
+    });
+    dansFenetre.forEach(function (t) {
+      if (ecart(t.d.debut, debut) > 0) debut = t.d.debut;
+      if (ecart(fin, t.d.fin) > 0) fin = t.d.fin;
+    });
+    var n = ecart(debut, fin) + 1;
+    grille.style.setProperty("--n", n);
+
+    var rangMois = el("div", "rang tete");
+    rangMois.appendChild(el("div", "libelle")).appendChild(el("span", "nom", "Lot et tâche"));
+    var i, courant = null, depuis = 0;
+    var cases = [];
+    for (i = 0; i < n; i++) {
+      var d = plus(jour(debut), i);
+      cases.push(d);
+      var m = MOIS[d.getUTCMonth()] + " " + d.getUTCFullYear();
+      if (m !== courant) {
+        if (courant !== null) rangMois.appendChild(celluleMois(courant, i - depuis));
+        courant = m; depuis = i;
+      }
+    }
+    if (courant !== null) rangMois.appendChild(celluleMois(courant, n - depuis));
+    grille.appendChild(rangMois);
+
+    function celluleMois(txt, largeur) {
+      var c = el("div", "mois", txt);
+      c.style.gridColumn = "span " + largeur;
+      return c;
+    }
+
+    var rangJours = el("div", "rang tete");
+    rangJours.appendChild(el("div", "libelle")).appendChild(el("span", "nom", ""));
+    cases.forEach(function (d) {
+      var c = el("div", "cellule-tete");
+      c.appendChild(el("span", "jsem", JSEM[d.getUTCDay()]));
+      c.appendChild(el("span", "jnum", String(d.getUTCDate())));
+      if (cle(d) === auj) { c.style.background = "var(--aujourdhui)"; c.style.fontWeight = "700"; c.title = "Aujourd'hui"; }
+      rangJours.appendChild(c);
+    });
+    grille.appendChild(rangJours);
+
+    if (!dansFenetre.length) {
+      grille.appendChild(vide(retenues.length
+        ? "Aucune tâche datée dans la fenêtre du chantier"
+        : "Aucune tâche ne correspond aux filtres",
+        retenues.length
+          ? "Les travaux retenus portent des dates hors du 23 novembre — 22 décembre. Voir la liste au bas de la page."
+          : "Change de lot ou d'avancement."));
+      rendreListe([], {});
+      rendreSecondaire(dehors, sansDate);
+      rendreLegende();
+      return;
+    }
+
+    var ordre = [], parLot = {};
+    dansFenetre.forEach(function (t) {
+      if (!parLot[t.lot.nom]) { parLot[t.lot.nom] = { lot: t.lot, taches: [] }; ordre.push(t.lot.nom); }
+      parLot[t.lot.nom].taches.push(t);
+    });
+
+    ordre.forEach(function (nomLot) {
+      var b = parLot[nomLot];
+      b.depart = b.lot.dLot ? b.lot.dLot.debut : b.taches.reduce(function (acc, t) {
+        return (acc === null || ecart(t.d.debut, acc) > 0) ? t.d.debut : acc;
+      }, null);
+    });
+    ordre.sort(function (a, b) {
+      return ecart(parLot[b].depart, parLot[a].depart) || (a < b ? -1 : 1);
+    });
+
+    ordre.forEach(function (nomLot, rang) {
+      var bloc = parLot[nomLot];
+      var solo = bloc.taches.length === 1 && bloc.taches[0].seul;
+      var rl = el("div", "rang lot" + (solo ? " solo" : ""));
+      var libL = el("div", "libelle");
+      libL.appendChild(el("span", "num", String(rang + 1).padStart(2, "0")));
+      var boite = el("div", "lot-tete");
+      boite.appendChild(el("span", "nom", nomLot));
+      if (bloc.lot.fournisseur) boite.appendChild(el("span", "fourn", bloc.lot.fournisseur));
+      libL.appendChild(boite);
+      if (solo) libL.appendChild(badge(bloc.taches[0].avancement));
+      rl.appendChild(libL);
+      if (solo) {
+        for (var s = 0; s < n; s++) rl.appendChild(pisteVide(cases[s], auj, 2 + s));
+        rl.appendChild(barreDe(bloc.taches[0], debut, n));
+      } else {
+        var bande = el("div", "piste");
+        bande.style.gridColumn = "2 / span " + n;
+        rl.appendChild(bande);
+        var dl = bloc.lot.dLot;
+        if (dl && ecart(dl.debut, fin) >= 0 && ecart(debut, dl.fin) >= 0) {
+          var j0 = Math.max(0, ecart(debut, dl.debut));
+          var j1 = Math.min(n - 1, ecart(debut, dl.fin));
+          var apercu = el("div", "bande-lot");
+          apercu.style.gridColumn = (2 + j0) + " / span " + Math.max(1, j1 - j0 + 1);
+          apercu.title = "Fenêtre du lot : " + joliJour(dl.debut) + " → " + joliJour(dl.fin);
+          rl.appendChild(apercu);
+        }
+      }
+      grille.appendChild(rl);
+      if (solo) return;
+      bloc.taches.sort(function (a, b) { return ecart(b.d.debut, a.d.debut) || ecart(b.d.fin, a.d.fin); });
+      bloc.taches.forEach(function (t) {
+        var r = el("div", "rang tache");
+        var lib = el("div", "libelle");
+        lib.appendChild(el("span", "nom", t.nom));
+        lib.appendChild(badge(t.avancement));
+        r.appendChild(lib);
+        for (var k = 0; k < n; k++) r.appendChild(pisteVide(cases[k], auj, 2 + k));
+        r.appendChild(barreDe(t, debut, n));
+        grille.appendChild(r);
+      });
+    });
+
+    if (ecart(debut, OUVERTURE) >= 0 && ecart(OUVERTURE, fin) >= 0) {
+      var rj = el("div", "rang");
+      var libJ = el("div", "libelle");
+      var nomJ = el("span", "nom", "Fin des travaux");
+      nomJ.style.fontWeight = "700";
+      libJ.appendChild(nomJ);
+      rj.appendChild(libJ);
+      for (var z = 0; z < n; z++) rj.appendChild(pisteVide(cases[z], auj, 2 + z));
+      var j = el("div", "jalon", "22 déc. — fin des travaux");
+      j.style.gridColumn = (2 + ecart(debut, OUVERTURE)) + " / span " + Math.min(4, n - ecart(debut, OUVERTURE));
+      rj.appendChild(j);
+      grille.appendChild(rj);
+    }
+
+    rendreListe(ordre, parLot);
+    rendreSecondaire(dehors, sansDate);
+    rendreLegende();
+    centrerSurAujourdhui(debut, n, auj);
+  }
+
+  /* le meme contenu, ecrit au long : c'est la version lisible sur un telephone */
+  function rendreListe(ordre, parLot) {
+    var zone = $("liste");
+    zone.textContent = "";
+    if (!ordre.length) {
+      zone.appendChild(el("div", "fil-vide", "Rien à afficher avec les filtres choisis."));
+      return;
+    }
+    ordre.forEach(function (nomLot) {
+      var bloc = parLot[nomLot];
+      var carte = el("div", "carte");
+      var tete = el("div", "carte-tete");
+      tete.appendChild(el("span", "nom", nomLot));
+      if (bloc.lot.fournisseur) tete.appendChild(el("span", "fourn", bloc.lot.fournisseur));
+      var solo = bloc.taches.length === 1 && bloc.taches[0].seul;
+      if (solo) {
+        var t0 = bloc.taches[0];
+        tete.appendChild(el("span", "dates",
+          t0.d.debut === t0.d.fin ? joliJour(t0.d.debut)
+                                  : joliJour(t0.d.debut) + " → " + joliJour(t0.d.fin)));
+        tete.appendChild(badge(t0.avancement));
+        tete.style.borderBottom = "0";
+        carte.appendChild(tete);
+        zone.appendChild(carte);
+        return;
+      }
+      carte.appendChild(tete);
+      var ul = el("ul");
+      bloc.taches.slice().sort(function (a, b) {
+        return ecart(b.d.debut, a.d.debut) || ecart(b.d.fin, a.d.fin);
+      }).forEach(function (t) {
+        var li = el("li");
+        li.appendChild(el("span", "quoi", t.nom));
+        li.appendChild(el("span", "dates",
+          t.d.debut === t.d.fin ? joliJour(t.d.debut)
+                                : joliJour(t.d.debut) + " → " + joliJour(t.d.fin)));
+        li.appendChild(badge(t.avancement));
+        ul.appendChild(li);
+      });
+      carte.appendChild(ul);
+      zone.appendChild(carte);
+    });
+  }
+
+  function barreDe(t, debut, n) {
+    var i0 = Math.max(0, ecart(debut, t.d.debut));
+    var i1 = Math.min(n - 1, ecart(debut, t.d.fin));
+    var len = Math.max(1, i1 - i0 + 1);
+    var b = el("div", "barre-tache");
+    b.style.gridColumn = (2 + i0) + " / span " + len;
+    b.style.background = COULEURS[t.avancement] || "#9a9590";
+    if (CLAIR[t.avancement]) b.style.color = "#fff";
+    var libre = len * 36 - 20;
+    var etiquette = joliJour(t.d.debut) + (t.d.debut === t.d.fin ? "" : " → " + joliJour(t.d.fin));
+    if (libre > 92) b.appendChild(el("span", "txt", t.nom));
+    else b.appendChild(el("span", "j", String(ecart(t.d.debut, t.d.fin) + 1) + " j"));
+    b.title = t.nom + " · " + etiquette + " · " + (t.avancement || "sans avancement");
+    return b;
+  }
+
+  function pisteVide(d, auj, colonne) {
+    var w = d.getUTCDay();
+    var k = cle(d);
+    var fete = ecart(FETE_DEBUT, k) >= 0 && ecart(k, FETE_FIN) >= 0;
+    var c = el("div", "piste" + (w === 0 || w === 6 ? " we" : "") + (k === auj ? " auj" : "") + (fete ? " fete" : ""));
+    if (fete) c.title = "Fermeture des Fêtes — rien ne reprend avant le 4 janvier";
+    c.style.gridColumn = String(colonne);
+    return c;
+  }
+
+  function vide(titre, detail) {
+    var v = el("div", "vide");
+    v.appendChild(el("b", null, titre));
+    v.appendChild(document.createTextNode(detail));
+    return v;
+  }
+
+  function centrerSurAujourdhui(debut, n, auj) {
+    var i = ecart(debut, auj);
+    if (i < 0 || i >= n) return;
+    var d = $("defile");
+    var cible = i * 36 - 60;
+    if (cible > 0 && d.scrollWidth > d.clientWidth) d.scrollLeft = cible;
+  }
+
+  function rendreSecondaire(dehors, sansDate) {
+    var zone = $("secondaire");
+    zone.textContent = "";
+    if (dehors.length) {
+      var d1 = el("details", "bloc");
+      var s1 = el("summary", null, dehors.length + " tâche" + (dehors.length > 1 ? "s" : "") + " datée"
+        + (dehors.length > 1 ? "s" : "") + " hors de la fenêtre du chantier");
+      d1.appendChild(s1);
+      var ul = el("ul", "hors");
+      dehors.sort(function (a, b) { return ecart(b.d.debut, a.d.debut); }).forEach(function (t) {
+        var li = el("li");
+        li.appendChild(el("span", null, t.nom));
+        li.appendChild(badge(t.avancement));
+        li.appendChild(el("span", "lot-de", t.lot.nom));
+        li.appendChild(el("span", "dates", joliJour(t.d.debut) + " → " + joliJour(t.d.fin)));
+        ul.appendChild(li);
+      });
+      d1.appendChild(ul);
+      zone.appendChild(d1);
+    }
+    if (sansDate.length) {
+      var d2 = el("details", "bloc");
+      d2.appendChild(el("summary", null, sansDate.length + " tâche" + (sansDate.length > 1 ? "s" : "") + " sans date"));
+      var ul2 = el("ul", "hors");
+      sansDate.forEach(function (t) {
+        var li = el("li");
+        li.appendChild(el("span", null, t.nom));
+        li.appendChild(badge(t.avancement));
+        li.appendChild(el("span", "lot-de", t.lot.nom));
+        ul2.appendChild(li);
+      });
+      d2.appendChild(ul2);
+      zone.appendChild(d2);
+    }
+  }
+
+  function rendreLegende() {
+    var l = $("legende");
+    l.textContent = "";
+    Object.keys(COULEURS).forEach(function (k) {
+      var s = el("span", "puce");
+      var i = el("i"); i.style.background = COULEURS[k];
+      s.appendChild(i); s.appendChild(document.createTextNode(k));
+      l.appendChild(s);
+    });
+    var s2 = el("span", "puce");
+    var i2 = el("i"); i2.style.background = "var(--accent)"; i2.style.transform = "rotate(45deg)"; i2.style.borderRadius = "0";
+    s2.appendChild(i2); s2.appendChild(document.createTextNode("Fin des travaux"));
+    l.appendChild(s2);
+    var s3 = el("span", "puce");
+    var i3 = el("i");
+    i3.style.background = "repeating-linear-gradient(135deg, #cfc9c2 0 4px, transparent 4px 8px)";
+    s3.appendChild(i3); s3.appendChild(document.createTextNode("Congé des Fêtes (24 déc. — 3 janv.)"));
+    l.appendChild(s3);
+  }
+
+  function rendreCompteur() {
+    var reste = Math.max(0, CIBLE - Date.now());
+    var t = Math.floor(reste / 1000);
+    var j = Math.floor(t / 86400), h = Math.floor((t % 86400) / 3600);
+    var m = Math.floor((t % 3600) / 60), sec = t % 60;
+    $("cJ").textContent = String(j);
+    $("cH").textContent = String(h).padStart(2, "0");
+    $("cM").textContent = String(m).padStart(2, "0");
+    $("cS").textContent = String(sec).padStart(2, "0");
+  }
+
+  /* ---------- fil du chantier ---------- */
+  function joliQuand(ms) {
+    var d = new Date(ms), n = new Date();
+    var h = String(d.getHours()).padStart(2, "0") + " h " + String(d.getMinutes()).padStart(2, "0");
+    if (d.toDateString() === n.toDateString()) return "Aujourd'hui · " + h;
+    var hier = new Date(n.getTime() - 86400000);
+    if (d.toDateString() === hier.toDateString()) return "Hier · " + h;
+    return d.getDate() + " " + MOIS[d.getMonth()] + " · " + h;
+  }
+
+  function cheminSur(s) { return typeof s === "string" && /^medias\/[A-Za-z0-9._-]{1,120}$/.test(s); }
+
+  function mediasDe(liste) {
+    if (!Array.isArray(liste) || !liste.length) return null;
+    var boite = el("div", "medias");
+    var n = 0;
+    liste.forEach(function (m) {
+      if (!m || !cheminSur(m.src)) return;
+      if (/^video\//.test(String(m.type || ""))) {
+        var vid = document.createElement("video");
+        vid.src = m.src; vid.controls = true; vid.preload = "metadata";
+        boite.appendChild(vid); n++;
+      } else {
+        var a = el("a");
+        a.href = m.src; a.target = "_blank"; a.rel = "noopener";
+        var img = document.createElement("img");
+        img.src = m.src; img.alt = ""; img.loading = "lazy";
+        a.appendChild(img);
+        boite.appendChild(a); n++;
+      }
+    });
+    return n ? boite : null;
+  }
+
+  function rendreFil() {
+    var liste = $("messages");
+    liste.textContent = "";
+    var msgs = Array.isArray(NOUVELLES) ? NOUVELLES : [];
+    if (!msgs.length) {
+      liste.appendChild(el("div", "fil-vide", "Aucune nouvelle du chantier pour l'instant."));
+      return;
+    }
+    msgs.forEach(function (v) {
+      var li = el("li", "message");
+      var tete = el("div", "msg-tete");
+      tete.appendChild(el("span", "msg-qui", String(v.qui || "Sharon")));
+      tete.appendChild(el("time", "quand", joliQuand(Number(v.at) || Date.now())));
+      li.appendChild(tete);
+      var texte = String(v.texte || "");
+      if (texte) li.appendChild(el("p", "msg-texte", texte));
+      var med = mediasDe(v.medias);
+      if (med) li.appendChild(med);
+      liste.appendChild(li);
+    });
+  }
+
+  function marquerGenere() {
+    if (!GENERE) { $("synchroTxt").textContent = "Calendrier de chantier"; return; }
+    var d = new Date(GENERE);
+    $("synchroTxt").textContent = "Mis à jour le " + d.getDate() + " " + MOIS[d.getMonth()]
+      + " à " + String(d.getHours()).padStart(2, "0") + " h " + String(d.getMinutes()).padStart(2, "0");
+  }
+
+  /* ---------- controles ---------- */
+  $("fLot").addEventListener("change", function () { etat.lot = this.value; rendre(); });
+  $("fFourn").addEventListener("change", function () { etat.fournisseur = this.value; rendre(); });
+  $("fEtat").addEventListener("change", function () { etat.avancement = this.value; rendre(); });
+  $("bTermine").addEventListener("click", function () {
+    etat.masquerTermines = !etat.masquerTermines;
+    this.setAttribute("aria-pressed", etat.masquerTermines ? "true" : "false");
+    this.textContent = etat.masquerTermines ? "Afficher faits et annulés" : "Masquer faits et annulés";
+    rendre();
+  });
+
+  rendreCompteur();
+  setInterval(rendreCompteur, 1000);
+  marquerGenere();
+  rendreFil();
+
+  if (DONNEES && DONNEES.items) {
+    etat.taches = aplatir(DONNEES);
+    remplirFiltres(etat.taches);
+    rendre();
+  } else {
+    $("grille").appendChild(vide("Le calendrier n'a pas pu être généré",
+      "Reviens dans quelques heures, ou appelle Sharon directement."));
+  }
+})();
+/*]]>*/
+</script>
+</body>
+</html>
