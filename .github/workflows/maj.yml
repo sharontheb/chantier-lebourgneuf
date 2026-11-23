@@ -1,12 +1,12 @@
 name: Mise a jour du calendrier
 
-# Lit le tableau Monday et republie la page, sept fois par jour.
+# Lit le tableau Monday et republie la page, chaque heure de 6h37 a 22h37.
 # Heures UTC : le chantier se fait en novembre-decembre, donc Quebec = UTC-5.
-# 11h37 UTC = 6h37 a Quebec, 23h37 UTC = 18h37 a Quebec.
+# 11h37 UTC = 6h37 a Quebec; 3h37 UTC = 22h37 a Quebec la veille.
 
 on:
   schedule:
-    - cron: "37 11,13,15,17,19,21,23 * * *"
+    - cron: "37 11-23,0-3 * * *"
   workflow_dispatch:
 
 permissions:
